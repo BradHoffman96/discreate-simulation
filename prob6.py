@@ -7,6 +7,9 @@ rho = 0
 p0 = 0
 P = 0
 L_Q = 0
+L = 0
+w = 0
+w_Q = 0
 
 def calculate_p0():
     global p0, c, rho
@@ -35,6 +38,25 @@ def calculate_LQ():
 
     L_Q = (rho * P) / (1 - rho)
 
+def calculate_L():
+    global c, rho, P, L
+
+    value1 = c * rho
+    value2 = (rho * P)/(1-rho)
+
+    L = value1 + value2
+
+def calculate_w():
+    global L, lamb, w
+
+    w = L / lamb
+
+def calculate_wQ():
+    global w, w_Q, mu
+
+    w_Q = w - (1/mu)
+    return w_Q 
+
 def main():
     global rho, c, mu, p0, P
 
@@ -49,6 +71,15 @@ def main():
 
     calculate_LQ()
     print("L_Q: ", L_Q)
+
+    calculate_L()
+    print("L: ", L)
+
+    calculate_w()
+    print("w: ", w)
+
+    print("w_Q: ", calculate_wQ())
+    
 
 
 if __name__ == "__main__":
